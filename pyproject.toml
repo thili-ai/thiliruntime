@@ -1,0 +1,45 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "thiliruntime"
+version = "0.1.0"
+description = "A small, hackable multi-agent supervisor: a static dependency graph, concurrent wave dispatch, retry-or-abort failure handling, and an auditable decision report for 'process a return' — the reference implementation for the Learn Fast course 'Orchestrate a Multi-Agent System'."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [{ name = "thili.ai" }]
+keywords = ["multi-agent", "orchestration", "supervisor", "a2a", "mcp", "agents"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Intended Audience :: Developers",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+  "a2a-sdk",
+  "fastapi",
+  "uvicorn",
+  "httpx",
+  "thilimcp @ git+https://github.com/thili-ai/thilimcp.git",
+  "thilia2a @ git+https://github.com/thili-ai/thilia2a.git",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "pytest-asyncio"]
+
+[tool.hatch.metadata]
+# thilimcp and thilia2a are direct git references, not PyPI releases - allow them.
+allow-direct-references = true
+
+[project.urls]
+Homepage = "https://github.com/thili-ai/thiliruntime"
+Repository = "https://github.com/thili-ai/thiliruntime"
+"Learn Fast course" = "https://learnfast.thili.ai"
+
+[tool.hatch.build.targets.wheel]
+packages = ["thiliruntime"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
